@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-const JOB_SERVICE_URL = 'http://localhost:8080';
-const RESUME_SERVICE_URL = 'http://localhost:8000';
-const SCORING_SERVICE_URL = 'http://localhost:8081';
+
+// Example inside your React components
+const JOB_SERVICE_URL = import.meta.env.VITE_JOB_SERVICE_URL || "http://localhost:8080";
+const RESUME_SERVICE_URL = import.meta.env.VITE_RESUME_SERVICE_URL || "http://localhost:8000";
+const SCORING_SERVICE_URL = import.meta.env.VITE_SCORING_SERVICE_URL || "http://localhost:8081";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('jobs');

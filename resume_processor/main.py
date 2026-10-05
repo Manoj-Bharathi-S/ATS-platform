@@ -6,7 +6,7 @@ import io
 import uuid
 import re
 from fastapi.middleware.cors import CORSMiddleware # <-- CRITICAL IMPORT
-
+import os
 app = FastAPI(title="Resume Processing Service")
 
 app.add_middleware(
@@ -18,7 +18,8 @@ app.add_middleware(
 )
 # MongoDB connection string from your docker-compose.yml
 # Use 'mongodb' if running inside docker, otherwise 'localhost'
-MONGO_URI = "mongodb://root_admin:root_password@10.198.74.72:27017/resume_processing_db?authSource=admin"
+
+MONGO_URI = os.environ.get("MONGO_URI", "mongodb://localhost:27017")
 
 # Create a global database client variable
 db_client = None
