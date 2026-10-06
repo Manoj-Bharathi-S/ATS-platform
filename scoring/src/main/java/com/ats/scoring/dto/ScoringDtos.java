@@ -1,5 +1,8 @@
 package com.ats.scoring.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 /**
@@ -7,7 +10,7 @@ import java.util.List;
  */
 public class ScoringDtos {
 
-    // Matches the JSON from the Job Service (port 8080)
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class JobDto {
         private Long id;
         private String title;
@@ -24,18 +27,20 @@ public class ScoringDtos {
         public void setMinExperienceYears(Integer minExperienceYears) { this.minExperienceYears = minExperienceYears; }
     }
 
-    // Matches the JSON from the Python Resume Service (port 8000)
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class CandidateDto {
-        private String candidate_id; // Maps to Python JSON key
-        private List<String> extracted_skills; // Maps to Python JSON key
+        @JsonProperty("candidate_id")
+        private String candidateId;
 
-        public String getCandidate_id() { return candidate_id; }
-        public void setCandidate_id(String candidate_id) { this.candidate_id = candidate_id; }
-        public List<String> getExtracted_skills() { return extracted_skills; }
-        public void setExtracted_skills(List<String> extracted_skills) { this.extracted_skills = extracted_skills; }
+        @JsonProperty("extracted_skills")
+        private List<String> extractedSkills;
+
+        public String getCandidateId() { return candidateId; }
+        public void setCandidateId(String candidateId) { this.candidateId = candidateId; }
+        public List<String> getExtractedSkills() { return extractedSkills; }
+        public void setExtractedSkills(List<String> extractedSkills) { this.extractedSkills = extractedSkills; }
     }
 
-    // The output result returned to the user
     public static class ScoreResultDto {
         private String candidateId;
         private Long jobId;
